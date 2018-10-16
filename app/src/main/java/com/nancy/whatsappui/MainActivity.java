@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recycle;
     private RecyclerViewAdapter adapter;
-    private List<ModelClass> listModel;
+    //private List<ModelClass> listModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,27 +30,19 @@ public class MainActivity extends AppCompatActivity {
         DividerItemDecoration decoration = new DividerItemDecoration(this, lay.getOrientation());
         recycle.addItemDecoration(decoration);
 
-        listModel = new ArrayList<ModelClass>();
+        List<ModelClass> listModelCopy  = setData("Nancy","12:00","Hi");
 
-        setData();
-        adapter = new RecyclerViewAdapter(this,listModel);
+        adapter = new RecyclerViewAdapter(this,listModelCopy);
         recycle.setAdapter(adapter);
 
     }
 
-    public void setData()
+    public List<ModelClass> setData(String name,String time,String msg)
     {
-        ModelClass m = new ModelClass("Nancy","12:00","Hi");
-        listModel.add(m);
+        ModelClass m = new ModelClass(name,time,msg);
+         List<ModelClass> model = new ArrayList<ModelClass>();
+         model.add(m);
 
-        ModelClass n = new ModelClass("Adi","1:00","Hi Baby");
-        listModel.add(n);
-
-        ModelClass p = new ModelClass("Adi mom","0:00","Hi Beta");
-        listModel.add(p);
-
-        ModelClass q = new ModelClass("Adi Berlin","3:00","Hi Berlin hero");
-        listModel.add(q);
-
+       return model;
     }
 }
